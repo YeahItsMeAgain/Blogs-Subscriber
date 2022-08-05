@@ -8,8 +8,11 @@ import (
 )
 
 func StructsToString[E comparable](elements []E) string {
-	var res string
+	if len(elements) == 0 {
+		return "❌ Empty."
+	}
 
+	var res string
 	for _, element := range elements {
 		res += "----------\n"
 		val := reflect.ValueOf(element)

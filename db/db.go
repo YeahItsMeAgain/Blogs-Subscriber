@@ -2,19 +2,12 @@ package db
 
 import (
 	"blogs_subscriber/config"
+	"blogs_subscriber/db/models"
 	"log"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
-
-type User struct {
-	gorm.Model
-	TgId      int64 `gorm:"uniqueIndex"`
-	FirstName string
-	LastName  string
-	Username  string
-}
 
 var DB *gorm.DB
 
@@ -25,5 +18,6 @@ func Init() {
 		panic("failed to connect database")
 	}
 	DB = db
-	db.AutoMigrate(&User{})
+	db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&models.Blog{})
 }
