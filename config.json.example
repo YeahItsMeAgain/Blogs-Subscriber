@@ -1,0 +1,5 @@
+{
+    "BotToken": "XXXXXXXX",
+    "SqliteDb": "blog_subscriber.db",
+    "AdminIds": [12345]
+}

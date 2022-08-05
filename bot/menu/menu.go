@@ -7,11 +7,20 @@ import (
 )
 
 var (
-	BtnList = telebot.Btn{Text: "📚 List"}
-	Menu    = &telebot.ReplyMarkup{
+	BtnList       = telebot.Btn{Text: "📚 List"}
+	AdminBtnUsers = telebot.Btn{Text: "👤 Users"}
+	menuButtons   = telebot.Row{BtnList}
+	Menu          = &telebot.ReplyMarkup{
 		ResizeKeyboard: true,
 		ReplyKeyboard: utils.CreateReplyMarkup(
-			telebot.Row{BtnList},
+			menuButtons,
+		),
+	}
+	AdminMenu = &telebot.ReplyMarkup{
+		ResizeKeyboard: true,
+		ReplyKeyboard: utils.CreateReplyMarkup(
+			menuButtons,
+			telebot.Row{AdminBtnUsers},
 		),
 	}
 )

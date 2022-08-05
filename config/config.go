@@ -8,6 +8,8 @@ import (
 
 type ConfigT struct {
 	BotToken string
+	SqliteDb string
+	AdminIds []int64
 }
 
 var Config *ConfigT

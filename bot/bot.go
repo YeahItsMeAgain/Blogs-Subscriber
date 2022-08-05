@@ -8,6 +8,7 @@ import (
 	"log"
 
 	"gopkg.in/telebot.v3"
+	"gopkg.in/telebot.v3/middleware"
 )
 
 func Run() {
@@ -24,4 +25,8 @@ func Run() {
 func initHandlers(bot *telebot.Bot) {
 	bot.Handle("/start", handlers.HandleStart)
 	bot.Handle(&menu.BtnList, handlers.HandleList)
+
+	adminOnly := bot.Group()
+	adminOnly.Use(middleware.Whitelist(config.Config.AdminIds...))
+	adminOnly.Handle(&menu.AdminBtnUsers, handlers.HandleUsers)
 }
