@@ -12,12 +12,10 @@ import (
 
 func HandleStart(ctx telebot.Context) error {
 	db.DB.FirstOrCreate(&models.User{
-		BaseUser: models.BaseUser{
-			TgId:      ctx.Sender().ID,
-			FirstName: ctx.Sender().FirstName,
-			LastName:  ctx.Sender().LastName,
-			Username:  ctx.Sender().Username,
-		},
+		TgId:      ctx.Sender().ID,
+		FirstName: ctx.Sender().FirstName,
+		LastName:  ctx.Sender().LastName,
+		Username:  ctx.Sender().Username,
 	})
 
 	if slices.Contains(config.Config.AdminIds, ctx.Sender().ID) {

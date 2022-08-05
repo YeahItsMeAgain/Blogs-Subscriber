@@ -9,6 +9,7 @@ import (
 var (
 	BtnList       = telebot.Btn{Text: "📚 List"}
 	AdminBtnUsers = telebot.Btn{Text: "👤 Users"}
+	AdminBtnBlogs = telebot.Btn{Text: "📝 Blogs"}
 	menuButtons   = telebot.Row{BtnList}
 	Menu          = &telebot.ReplyMarkup{
 		ResizeKeyboard: true,
@@ -20,7 +21,7 @@ var (
 		ResizeKeyboard: true,
 		ReplyKeyboard: utils.CreateReplyMarkup(
 			menuButtons,
-			telebot.Row{AdminBtnUsers},
+			telebot.Row{AdminBtnUsers, AdminBtnBlogs},
 		),
 	}
 )

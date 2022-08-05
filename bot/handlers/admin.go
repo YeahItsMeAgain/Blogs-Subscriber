@@ -8,14 +8,14 @@ import (
 	"gopkg.in/telebot.v3"
 )
 
-func HandleUsers(ctx telebot.Context) error {
-	var users []models.BaseUser
-	db.DB.Model(&models.User{}).Find(&users)
+func HandleAdminUsers(ctx telebot.Context) error {
+	var users []models.User
+	db.DB.Find(&users)
 	return ctx.Send(utils.StructsToString(users))
 }
 
-func HandleBlogs(ctx telebot.Context) error {
-	var blogs []models.BaseBlog
-	db.DB.Model(&models.Blog{}).Find(&blogs)
+func HandleAdminBlogs(ctx telebot.Context) error {
+	var blogs []models.Blog
+	db.DB.Find(&blogs)
 	return ctx.Send(utils.StructsToString(blogs))
 }
