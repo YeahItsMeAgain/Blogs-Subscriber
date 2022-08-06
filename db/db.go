@@ -13,11 +13,12 @@ var DB *gorm.DB
 
 func Init() {
 	log.Printf("[*] Initializing %s.", config.Config.SqliteDb)
-	db, err := gorm.Open(sqlite.Open(config.Config.SqliteDb), &gorm.Config{})
+
+	var err error
+	DB, err = gorm.Open(sqlite.Open(config.Config.SqliteDb), &gorm.Config{})
 	if err != nil {
-		panic("failed to connect database")
+		log.Fatal("[!] Failed to connect to database.")
 	}
-	DB = db
-	db.AutoMigrate(&models.User{})
-	db.AutoMigrate(&models.Blog{})
+	DB.AutoMigrate(&models.User{})
+	DB.AutoMigrate(&models.Blog{})
 }

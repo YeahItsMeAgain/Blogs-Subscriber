@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"net/url"
+	"strings"
 
 	"github.com/thoas/go-funk"
 	"gopkg.in/telebot.v3"
@@ -15,7 +16,11 @@ import (
 
 func HandleListBlogs(ctx telebot.Context) error {
 	user := utils.GetCurrentUser(ctx)
-	return ctx.Send(utils.StructsToString(user.Blogs))
+	var blogs []string
+	for _, blog := range user.Blogs {
+		blogs = append(blogs, blog.Url)
+	}
+	return ctx.Send(strings.Join(blogs, "\n"))
 }
 
 func HandleSubscribe(ctx telebot.Context) error {

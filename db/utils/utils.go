@@ -18,9 +18,9 @@ func StructsToString[E any](elements []E) string {
 
 	var res string
 	for _, element := range elements {
-		val := reflect.ValueOf(element)
 		res += fmt.Sprintf(
-			"----------\n%s----------\n", structToString(val),
+			"----------\n%s----------\n",
+			structToString(reflect.ValueOf(element)),
 		)
 	}
 	return res
@@ -29,13 +29,8 @@ func StructsToString[E any](elements []E) string {
 func structToString(val reflect.Value) string {
 	var res string
 	for i := 0; i < val.NumField(); i++ {
-		valType := val.Type().Field(i)
-		if valType.Tag.Get("hidden") != "" {
-			continue
-		}
-
 		if strVal := valToString(val.Field(i)); strVal != "" {
-			res += fmt.Sprintf("%s: %s\n", valType.Name, strVal)
+			res += fmt.Sprintf("%s: %s\n", val.Type().Field(i).Name, strVal)
 		}
 	}
 	return res
