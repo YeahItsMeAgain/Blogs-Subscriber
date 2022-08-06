@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"log"
 	"math"
+	"net/url"
 	"time"
 
 	"gopkg.in/telebot.v3"
@@ -36,6 +37,7 @@ func UpdateSubscribers(bot *telebot.Bot) {
 
 	log.Printf("[*] Updating subscribers for new updates.")
 	for _, blog := range blogs {
+		blogUrl, _ := url.Parse(blog.Url)
 		if len(blog.Subscribers) == 0 {
 			log.Printf("[*] Deleting %s", blog.Url)
 			db.DB.Delete(&blog)
@@ -54,7 +56,7 @@ func UpdateSubscribers(bot *telebot.Bot) {
 			for _, subscriber := range blog.Subscribers {
 				bot.Send(
 					&telebot.User{ID: subscriber.TgId},
-					fmt.Sprintf("%s was updated!", blog.Url),
+					fmt.Sprintf("%s (%s://%s) was updated!", blog.Url, blogUrl.Scheme, blogUrl.Hostname()),
 					telebot.NoPreview,
 				)
 			}
