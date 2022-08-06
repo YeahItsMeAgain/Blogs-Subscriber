@@ -1,9 +1,9 @@
 package handlers
 
 import (
+	"blogs_subscriber/bot/handlers/utils"
 	"blogs_subscriber/db"
 	"blogs_subscriber/db/models"
-	"blogs_subscriber/db/utils"
 	"fmt"
 	"log"
 	"net/url"

@@ -1,14 +1,9 @@
 package utils
 
 import (
-	"blogs_subscriber/db"
-	"blogs_subscriber/db/models"
 	"fmt"
 	"reflect"
 	"strconv"
-
-	"gopkg.in/telebot.v3"
-	"gorm.io/gorm/clause"
 )
 
 func StructsToString[E any](elements []E) string {
@@ -45,10 +40,4 @@ func valToString(val reflect.Value) string {
 	default:
 		return ""
 	}
-}
-
-func GetCurrentUser(ctx telebot.Context) models.User {
-	user := models.User{TgId: ctx.Sender().ID}
-	db.DB.Preload(clause.Associations).First(&user, "tg_id = ?", ctx.Sender().ID)
-	return user
 }
