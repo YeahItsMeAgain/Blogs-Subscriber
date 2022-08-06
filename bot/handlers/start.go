@@ -5,6 +5,7 @@ import (
 	"blogs_subscriber/config"
 	"blogs_subscriber/db"
 	"blogs_subscriber/db/models"
+	"fmt"
 	"log"
 
 	"golang.org/x/exp/slices"
@@ -21,7 +22,7 @@ func HandleStart(ctx telebot.Context) error {
 	log.Printf("[*] %d : %s Started the bot.", ctx.Sender().ID, ctx.Sender().Username)
 
 	if slices.Contains(config.Config.AdminIds, ctx.Sender().ID) {
-		return ctx.Send("👋 Welcome!", menu.AdminMenu)
+		return ctx.Send(fmt.Sprintf("👋 Welcome %s!", ctx.Sender().FirstName), menu.AdminMenu)
 	}
 	return ctx.Send("👋 Welcome!", menu.Menu)
 }
