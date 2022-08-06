@@ -9,6 +9,7 @@ import (
 type ConfigT struct {
 	BotToken           string
 	SqliteDb           string
+	AllowedIds         []int64
 	AdminIds           []int64
 	UpdateIntervalHrs  int
 	AllowedErrorMargin int

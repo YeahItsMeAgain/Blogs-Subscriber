@@ -26,11 +26,13 @@ func Run(bot *telebot.Bot) {
 }
 
 func initHandlers(bot *telebot.Bot) {
-	bot.Handle("/start", handlers.HandleStart)
-	bot.Handle(&menu.BtnList, handlers.HandleListBlogs)
-	bot.Handle(&menu.BtnSubscribe, handlers.HandleSubscribe)
-	bot.Handle(&menu.BtnUnsubscribe, handlers.HandleUnsubscribe)
-	bot.Handle(telebot.OnText, handlers.HandleBlogRequest)
+	onlyUsers := bot.Group()
+	onlyUsers.Use(middleware.Whitelist(config.Config.AllowedIds...))
+	onlyUsers.Handle("/start", handlers.HandleStart)
+	onlyUsers.Handle(&menu.BtnList, handlers.HandleListBlogs)
+	onlyUsers.Handle(&menu.BtnSubscribe, handlers.HandleSubscribe)
+	onlyUsers.Handle(&menu.BtnUnsubscribe, handlers.HandleUnsubscribe)
+	onlyUsers.Handle(telebot.OnText, handlers.HandleBlogRequest)
 
 	adminOnly := bot.Group()
 	adminOnly.Use(middleware.Whitelist(config.Config.AdminIds...))

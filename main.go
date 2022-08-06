@@ -13,7 +13,5 @@ func main() {
 
 	tgBot := bot.Init()
 	go timer.ScheduleUpdates(tgBot)
-
-	timer.UpdateSubscribers(tgBot)
 	bot.Run(tgBot)
 }

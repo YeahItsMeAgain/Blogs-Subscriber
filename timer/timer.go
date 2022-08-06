@@ -21,7 +21,7 @@ func ScheduleUpdates(bot *telebot.Bot) {
 		for {
 			select {
 			case <-ticker.C:
-				UpdateSubscribers(bot)
+				updateSubscribers(bot)
 			case <-quit:
 				ticker.Stop()
 				return
@@ -30,7 +30,7 @@ func ScheduleUpdates(bot *telebot.Bot) {
 	}()
 }
 
-func UpdateSubscribers(bot *telebot.Bot) {
+func updateSubscribers(bot *telebot.Bot) {
 	var blogs []models.Blog
 	db.DB.Preload(clause.Associations).Find(&blogs)
 
