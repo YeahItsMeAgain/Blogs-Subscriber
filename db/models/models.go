@@ -17,5 +17,5 @@ type Blog struct {
 	gorm.Model
 	Url         string  `gorm:"uniqueIndex"`
 	Subscribers []*User `gorm:"many2many:user_blogs;"`
-	HtmlLen     uint    `gorm:"default:0"`
+	HtmlLen     int     `gorm:"default:0" hidden:"true"`
 }

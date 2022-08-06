@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func GetHtmlLength(url string) (uint, error) {
+func GetHtmlLength(url string) (int, error) {
 	response, err := http.Get(url)
 	if err != nil {
 		return 0, err
@@ -16,5 +16,5 @@ func GetHtmlLength(url string) (uint, error) {
 	if err != nil {
 		return 0, err
 	}
-	return (uint)(len(body)), nil
+	return len(body), nil
 }
