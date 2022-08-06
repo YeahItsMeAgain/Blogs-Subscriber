@@ -12,6 +12,7 @@ var (
 	BtnUnsubscribe = telebot.Btn{Text: "🔕 Unsubscribe"}
 	AdminBtnUsers  = telebot.Btn{Text: "👤 Users"}
 	AdminBtnBlogs  = telebot.Btn{Text: "📝 Blogs"}
+	AdminBtnUpdate = telebot.Btn{Text: "📣 Update"}
 	menuButtons    = telebot.Row{BtnList, BtnSubscribe, BtnUnsubscribe}
 	Menu           = &telebot.ReplyMarkup{
 		ResizeKeyboard: true,
@@ -23,7 +24,7 @@ var (
 		ResizeKeyboard: true,
 		ReplyKeyboard: utils.CreateReplyMarkup(
 			menuButtons,
-			telebot.Row{AdminBtnUsers, AdminBtnBlogs},
+			telebot.Row{AdminBtnUsers, AdminBtnBlogs, AdminBtnUpdate},
 		),
 	}
 )

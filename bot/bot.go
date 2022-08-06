@@ -38,4 +38,5 @@ func initHandlers(bot *telebot.Bot) {
 	adminOnly.Use(middleware.Whitelist(config.Config.AdminIds...))
 	adminOnly.Handle(&menu.AdminBtnUsers, handlers.HandleAdminUsers)
 	adminOnly.Handle(&menu.AdminBtnBlogs, handlers.HandleAdminBlogs)
+	adminOnly.Handle(&menu.AdminBtnUpdate, handlers.HandleAdminUpdate)
 }
