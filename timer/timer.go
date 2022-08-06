@@ -37,6 +37,8 @@ func updateSubscribers(bot *telebot.Bot) {
 	log.Printf("[*] Updating subscribers for new updates.")
 	for _, blog := range blogs {
 		if len(blog.Subscribers) == 0 {
+			log.Printf("[*] Deleting %s", blog.Url)
+			db.DB.Delete(&blog)
 			continue
 		}
 
