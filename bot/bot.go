@@ -24,7 +24,10 @@ func Run() {
 
 func initHandlers(bot *telebot.Bot) {
 	bot.Handle("/start", handlers.HandleStart)
-	bot.Handle(&menu.BtnList, handlers.HandleList)
+	bot.Handle(&menu.BtnList, handlers.HandleListBlogs)
+	bot.Handle(&menu.BtnSubscribe, handlers.HandleSubscribe)
+	bot.Handle(&menu.BtnUnsubscribe, handlers.HandleUnsubscribe)
+	bot.Handle(telebot.OnText, handlers.HandleBlogRequest)
 
 	adminOnly := bot.Group()
 	adminOnly.Use(middleware.Whitelist(config.Config.AdminIds...))

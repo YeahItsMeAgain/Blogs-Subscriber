@@ -15,6 +15,6 @@ type User struct {
 
 type Blog struct {
 	gorm.Model
-	Url         string
+	Url         string  `gorm:"uniqueIndex"`
 	Subscribers []*User `gorm:"many2many:user_blogs;"`
 }

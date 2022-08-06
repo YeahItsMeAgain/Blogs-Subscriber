@@ -3,6 +3,7 @@ module blogs_subscriber
 go 1.19
 
 require (
+	github.com/thoas/go-funk v0.9.2
 	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e
 	gopkg.in/telebot.v3 v3.0.0
 	gorm.io/driver/sqlite v1.3.6

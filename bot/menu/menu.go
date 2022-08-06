@@ -7,11 +7,13 @@ import (
 )
 
 var (
-	BtnList       = telebot.Btn{Text: "📚 List"}
-	AdminBtnUsers = telebot.Btn{Text: "👤 Users"}
-	AdminBtnBlogs = telebot.Btn{Text: "📝 Blogs"}
-	menuButtons   = telebot.Row{BtnList}
-	Menu          = &telebot.ReplyMarkup{
+	BtnList        = telebot.Btn{Text: "📚 List"}
+	BtnSubscribe   = telebot.Btn{Text: "🔔 Subscribe"}
+	BtnUnsubscribe = telebot.Btn{Text: "🔕 Unsubscribe"}
+	AdminBtnUsers  = telebot.Btn{Text: "👤 Users"}
+	AdminBtnBlogs  = telebot.Btn{Text: "📝 Blogs"}
+	menuButtons    = telebot.Row{BtnList, BtnSubscribe, BtnUnsubscribe}
+	Menu           = &telebot.ReplyMarkup{
 		ResizeKeyboard: true,
 		ReplyKeyboard: utils.CreateReplyMarkup(
 			menuButtons,
