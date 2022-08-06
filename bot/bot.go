@@ -11,13 +11,16 @@ import (
 	"gopkg.in/telebot.v3/middleware"
 )
 
-func Run() {
+func Init() *telebot.Bot {
 	log.Printf("[*] Creating the bot.")
 	bot := utils.CreateBot(config.Config.BotToken)
 
 	log.Printf("[*] Creating handlers for the bot.")
 	initHandlers(bot)
+	return bot
+}
 
+func Run(bot *telebot.Bot) {
 	log.Printf("[*] Starting the bot.")
 	bot.Start()
 }

@@ -1,5 +1,7 @@
 {
     "BotToken": "XXXXXXXX",
     "SqliteDb": "blog_subscriber.db",
-    "AdminIds": [12345]
+    "AdminIds": [12345],
+    "UpdateIntervalHrs": 24,
+    "AllowedErrorMargin": 10
 }
