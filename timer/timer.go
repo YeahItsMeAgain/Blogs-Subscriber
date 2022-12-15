@@ -15,20 +15,31 @@ import (
 	"gorm.io/gorm/clause"
 )
 
+var timer *time.Timer
+
+func updateTimer() {
+	nextTick := time.Date(
+		time.Now().Year(), time.Now().Month(), time.Now().Day(),
+		config.Config.UpdateHourOfDay, 0, 0, 0, time.Local,
+	)
+
+	if nextTick.Before(time.Now()) {
+		nextTick = nextTick.Add(time.Duration(config.Config.UpdateIntervalHrs) * time.Hour)
+	}
+	diff := nextTick.Sub(time.Now())
+	if timer == nil {
+		timer = time.NewTimer(diff)
+	} else {
+		timer.Reset(diff)
+	}
+}
+
 func ScheduleUpdates(bot *telebot.Bot) {
-	ticker := time.NewTicker(time.Duration(config.Config.UpdateIntervalHrs) * time.Hour)
-	quit := make(chan struct{})
-	go func() {
-		for {
-			select {
-			case <-ticker.C:
-				UpdateSubscribers(bot)
-			case <-quit:
-				ticker.Stop()
-				return
-			}
-		}
-	}()
+	for {
+		updateTimer()
+		<-timer.C
+		UpdateSubscribers(bot)
+	}
 }
 
 func UpdateSubscribers(bot *telebot.Bot) {
