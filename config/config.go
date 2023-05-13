@@ -13,6 +13,7 @@ type ConfigT struct {
 	AdminIds           []int64
 	UpdateIntervalHrs  int
 	AllowedErrorMargin int
+	TGMaxMessageLength int
 }
 
 var Config *ConfigT

@@ -6,17 +6,28 @@ import (
 	"strconv"
 )
 
-func StructsToString[E any](elements []E) string {
+func StructsToString[E any](elements []E, length int) []string {
 	if len(elements) == 0 {
-		return "The list is empty."
+		return []string{"The list is empty."}
 	}
 
-	var res string
+	var res []string
+	currentString := ""
 	for _, element := range elements {
-		res += fmt.Sprintf(
+		strStruct := fmt.Sprintf(
 			"----------\n%s----------\n",
 			structToString(reflect.ValueOf(element)),
 		)
+		if len(currentString)+len(strStruct) < length {
+			currentString += strStruct
+		} else {
+			res = append(res, currentString)
+			currentString = strStruct
+		}
+	}
+
+	if currentString != "" {
+		res = append(res, currentString)
 	}
 	return res
 }

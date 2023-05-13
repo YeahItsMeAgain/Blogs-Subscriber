@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"blogs_subscriber/config"
 	"blogs_subscriber/db"
 	"blogs_subscriber/db/models"
 	"blogs_subscriber/db/utils"
@@ -12,13 +13,25 @@ import (
 func HandleAdminUsers(ctx telebot.Context) error {
 	var users []models.User
 	db.DB.Find(&users)
-	return ctx.Send(utils.StructsToString(users))
+	for _, usersMessage := range utils.StructsToString(users, config.Config.TGMaxMessageLength) {
+		err := ctx.Send(usersMessage)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func HandleAdminBlogs(ctx telebot.Context) error {
 	var blogs []models.Blog
 	db.DB.Find(&blogs)
-	return ctx.Send(utils.StructsToString(blogs))
+	for _, blogsMessage := range utils.StructsToString(blogs, config.Config.TGMaxMessageLength) {
+		err := ctx.Send(blogsMessage)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func HandleAdminUpdate(ctx telebot.Context) error {
