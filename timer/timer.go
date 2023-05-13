@@ -67,7 +67,7 @@ func UpdateSubscribers(bot *telebot.Bot) {
 			for _, subscriber := range blog.Subscribers {
 				bot.Send(
 					&telebot.User{ID: subscriber.TgId},
-					fmt.Sprintf("%s (%s://%s) was updated!", blog.Url, blogUrl.Scheme, blogUrl.Hostname()),
+					fmt.Sprintf("%s (%s://%s) was updated! (%d)", blog.Url, blogUrl.Scheme, blogUrl.Hostname(), newLength-blog.HtmlLen),
 					telebot.NoPreview,
 				)
 			}
