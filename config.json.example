@@ -4,6 +4,7 @@
     "AllowedIds": [12345, 67890],
     "AdminIds": [12345],
     "UpdateIntervalHrs": 24,
+    "UpdateHourOfDay": 18,
     "AllowedErrorMargin": 10,
     "TGMaxMessageLength": 4000
 }

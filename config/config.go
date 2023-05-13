@@ -12,6 +12,7 @@ type ConfigT struct {
 	AllowedIds         []int64
 	AdminIds           []int64
 	UpdateIntervalHrs  int
+	UpdateHourOfDay    int
 	AllowedErrorMargin int
 	TGMaxMessageLength int
 }
